@@ -1,7 +1,6 @@
 # API Security
 ## Basic Authentication
 Basic Authentication is a simple and widely used method for authenticating users in web applications and APIs. It is based on the HTTP protocol and involves sending a username and password in the request header for authentication.
-<img width="1293" alt="image" src="https://github.com/boushphong/API/assets/59940078/834db470-add6-4b8c-9780-1f9f01314b09">
 
 **How it works:**
 1. **Request**: When a client (e.g., a web browser or API client) wants to access a protected resource on a server, it sends an HTTP request to the server.
@@ -32,6 +31,7 @@ Basic Authentication is a simple and widely used method for authenticating users
 
 ## OAuth
 OAuth (Open Authorization) is a widely used protocol for authentication and authorization in the context of web and mobile applications. It allows applications to access protected resources on behalf of a user without exposing the user's credentials. OAuth is designed to be more secure and flexible than Basic Authentication.
+<img width="1293" alt="image" src="https://github.com/boushphong/API/assets/59940078/834db470-add6-4b8c-9780-1f9f01314b09">
 
 **How it works:**
 1. **User Initiates Authorization**: The process begins when a user (resource owner) wants to grant a third-party application (client) access to their protected resources on a resource server. For example, this could be allowing a mobile app to access a user's Google Drive files.
