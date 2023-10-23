@@ -42,8 +42,6 @@ Websockets are a communication protocol that enables two-way, real-time communic
 
 ### Considerations
 
-Websockets are a powerful technology for real-time, interactive communication, but like any technology, they come with certain considerations and potential drawbacks:
-
 1. **Resource Usage:** Keeping Websocket connections open can consume server resources. Servers need to manage and maintain these connections, and if not done efficiently, it can impact server performance.
 2. **Firewall and Proxy Issues:** Some network configurations, firewalls, and proxy servers may not allow Websocket connections, potentially limiting the accessibility of your application.
 3. **State Management:** Since Websockets maintain stateful connections, it's essential to manage state and handle disconnections or errors appropriately.
@@ -54,3 +52,40 @@ Websockets are a powerful technology for real-time, interactive communication, b
 8. **Testing and Debugging:** Debugging Websockets can be more challenging than traditional HTTP interactions, as it involves ongoing, real-time connections.
 9. **Message Queues:** In situations where reliability and message ordering are critical, you may need to implement additional message queuing mechanisms to ensure that messages are delivered and processed in the correct order.
 10. **Overhead for Small Messages:** Websockets can introduce overhead for small messages due to the framing and headers that accompany each message. For very small messages, this overhead may be significant.
+
+## HTTP Streaming
+HTTP streaming, often referred to as HTTP streaming or server-sent events (SSE), is a technology that allows a web server to push real-time updates to a web browser over a single, long-lived HTTP connection. Unlike Websockets, which provide full-duplex communication, HTTP streaming primarily supports unidirectional communication from the server to the client. It's particularly well-suited for scenarios where the client needs to receive updates from the server without the need for bidirectional communication.
+
+**1. Client Request:**
+- The process begins with the web browser (the client) making a standard HTTP request to a server, just like any other web page request. The client specifies that it wants to receive streaming updates by using special headers, typically `EventSource` or `text/event-stream`.
+- 
+**2. Server Response:**
+- The server responds to the client's request and establishes a long-lived HTTP connection. Instead of closing the connection after sending a response, the server keeps it open.
+
+**3. Continuous Data Streaming:**
+- Once the connection is established, the server sends data to the client as soon as new information is available. These data updates are typically in the form of text, and they are sent as individual events.
+
+**4. Event-Based Communication:**
+- The data sent from the server is organized into events. Each event can have a specific name and data associated with it. The client can listen for these events and take actions based on the received data.
+
+**5. Automatic Reconnection:**
+- If the connection is interrupted, the client can automatically attempt to reconnect to the server to resume receiving updates. This provides some fault tolerance.
+
+**6. Close Connection:**
+- The client can also explicitly close the connection when it's no longer needed. The server can acknowledge this request, and the connection is gracefully closed.
+
+HTTP streaming is often used for applications that require real-time updates, such as news tickers, live scoreboards, social media feeds, and other scenarios where the server needs to push data to the client as it becomes available. Unlike Websockets, it doesn't support bidirectional communication, making it well-suited for cases where the primary requirement is one-way data delivery from the server to the client.
+
+### Considerations
+
+1. **Unidirectional Communication:** SSE provides one-way communication from the server to the client. If you need bidirectional communication where the client can send data to the server as well, SSE may not be the best choice.
+2. **Browser Compatibility:** SSE is well-supported in modern web browsers, but older browsers may not fully support it. You may need to provide a fallback mechanism or use polyfills for broader compatibility.
+3. **No Support for Binary Data:** SSE is designed for sending text-based data. If you need to transfer binary data, you'll need to encode it into text format before sending it and decode it on the client side.
+4. **Connection Limits:** Some browsers impose limits on the number of concurrent SSE connections to a single domain. This can impact scalability, especially in applications with a high volume of clients.
+5. **Reconnection Logic:** Handling reconnections in SSE can be complex. If the connection is lost, the client needs to implement reconnection logic to resume receiving updates. This adds complexity to the client-side code.
+6. **Long-Lived Connections:** Keeping connections open for extended periods can consume server resources, so you must carefully manage the number of open SSE connections.
+7. **Reliability and Order:** SSE does not guarantee that messages will arrive in a specific order or that they will be delivered reliably. If order or guaranteed delivery is critical, you'll need to implement additional mechanisms to ensure it.
+8. **Error Handling:** Proper error handling is essential to deal with network interruptions, server failures, or other issues. SSE clients need to be robust and resilient to handle these situations gracefully.
+9. **Lack of Multiplexing:** SSE connections are typically one-to-one, meaning each connection represents a single data stream. If you need to multiplex multiple streams over a single connection, you may need to implement this yourself.
+10. **Cross-Origin Limitations:** SSE connections are subject to the same-origin policy, which can restrict their use in cross-origin scenarios. You may need to configure CORS (Cross-Origin Resource Sharing) settings on your server to allow SSE connections from different origins.
+11. **Limited to Text:** SSE is designed for sending text data. If you need to transmit more complex or structured data, you'll need to format it as text (e.g., using JSON) and parse it on the client side.
