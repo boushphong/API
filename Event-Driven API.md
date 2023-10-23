@@ -1,4 +1,6 @@
 # Event-Driven API
+![image](https://github.com/boushphong/API/assets/59940078/b21f7489-fad6-4dff-87ff-353e2d6b8e9a)
+
 ## Webhooks
 Webhooks allow the client to delegate the responsibility of notifying it about specific events to the server. This real-time communication method is more efficient and event-driven compared to the client repeatedly polling or checking the server for updates.
 
