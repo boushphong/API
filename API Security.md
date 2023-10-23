@@ -1,6 +1,7 @@
 # API Security
 ## Basic Authentication
 Basic Authentication is a simple and widely used method for authenticating users in web applications and APIs. It is based on the HTTP protocol and involves sending a username and password in the request header for authentication.
+<img width="1293" alt="image" src="https://github.com/boushphong/API/assets/59940078/834db470-add6-4b8c-9780-1f9f01314b09">
 
 **How it works:**
 1. **Request**: When a client (e.g., a web browser or API client) wants to access a protected resource on a server, it sends an HTTP request to the server.
